@@ -3,9 +3,10 @@ import React, { useState } from 'react'
 import {
   GoogleMap,
   useLoadScript,
-  Marker
+  Marker,
+  InfoWindow
 } from '@react-google-maps/api'
-
+import mapStyles from './mapStyles'
 
 const fromBase64 = value => {
   const buff = new Buffer.from(value, 'base64')
@@ -25,6 +26,7 @@ const center = {
 }
 
 const options = {
+  styles: mapStyles,
   disableDefaultUI: true,
   zoomControl: true
 }
@@ -38,7 +40,7 @@ export default function App () {
   const [markers, setMarkers] = useState([
     center
   ])
-
+  const [selectedMarker, setSelectedMarker] = useState(null)
 
   if (loadError) return 'Erro ao carregar o mapa'
   if (!isLoaded) return 'Carregando mapa'
@@ -56,9 +58,27 @@ export default function App () {
             <Marker
               key={index + `${item.lat}`}
               position={{ lat: item.lat, lng: item.lng }}
+              onClick={() => {
+                setSelectedMarker(item)
+              }}
             />
           )
         })}
+        {selectedMarker && (
+          <InfoWindow
+            position={{ lat: selectedMarker.lat, lng: selectedMarker.lng }}
+            onCloseClick={() => {
+              setSelectedMarker(null)
+            }}
+          >
+            <div>
+              {!selectedMarker.name && <h2>Nenhum nome definido.</h2>}
+              {selectedMarker.name && <h2>{selectedMarker.name}</h2>}
+              <p>Latidude: {selectedMarker.lat}</p>
+              <p>Longitude: {selectedMarker.lng}</p>
+            </div>
+          </InfoWindow>
+        )}
       </GoogleMap>
     </div>
   )
