@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import {
   GoogleMap,
-  useLoadScript
+  useLoadScript,
+  Marker
 } from '@react-google-maps/api'
 
 
@@ -34,6 +35,11 @@ export default function App () {
     libraries
   })
 
+  const [markers, setMarkers] = useState([
+    center
+  ])
+
+
   if (loadError) return 'Erro ao carregar o mapa'
   if (!isLoaded) return 'Carregando mapa'
   
@@ -45,6 +51,14 @@ export default function App () {
         center={center}
         options={options}
       >
+        {markers.map((item, index) => {
+          return (
+            <Marker
+              key={index + `${item.lat}`}
+              position={{ lat: item.lat, lng: item.lng }}
+            />
+          )
+        })}
       </GoogleMap>
     </div>
   )
