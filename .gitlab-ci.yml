@@ -9,10 +9,11 @@ testes:
     - npm install
   script:
     - npm test
-react_build:
+    
+build:
   image: node:14.12.0
   stage: build
   before_script:
     - npm install
   script:
-    - CI=false npm run build
+    - CI=true npm run build
