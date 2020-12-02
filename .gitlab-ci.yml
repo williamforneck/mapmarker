@@ -15,4 +15,4 @@ react_build:
   before_script:
     - npm install
   script:
-    - npm run-script build
+    - CI=false npm run build
