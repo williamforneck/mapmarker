@@ -6,3 +6,6 @@
 
 ## Para executar o app:
 ### npm i && npm start
+
+## Para executar os testes:
+### npm test
