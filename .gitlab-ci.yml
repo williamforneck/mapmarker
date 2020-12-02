@@ -1,13 +1,6 @@
 stages:
-  - code_quality
   - test
   - build
-  
-eslint:
-  image: node:14.12.0
-  stage: code_quality
-  before_script:
-    - npm install
 
 testes:
   image: node:14.12.0
