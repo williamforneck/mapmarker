@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
+
+import { AiOutlineCloseCircle } from 'react-icons/ai'
 
 import {
   GoogleMap,
@@ -6,7 +8,9 @@ import {
   Marker,
   InfoWindow
 } from '@react-google-maps/api'
+
 import mapStyles from './mapStyles'
+import './styles.css'
 
 const fromBase64 = value => {
   const buff = new Buffer.from(value, 'base64')
@@ -37,21 +41,78 @@ export default function App () {
     libraries
   })
 
-  const [markers, setMarkers] = useState([
-    center
-  ])
+  const [markers, setMarkers] = useState([])
   const [selectedMarker, setSelectedMarker] = useState(null)
+  const [tempMarkers, setTempMarkers] = useState({})
+  const [namePlace, setNamePlace] = useState(null)
+
+  const onMapClick = useCallback(evt => {
+    const form = window.document.getElementById('formNamePlace').style
+    const backForm = window.document.getElementById('backForm').style
+    form.top = '100px'
+    backForm.zIndex = '10'
+    backForm.opacity = '1'
+
+    setTempMarkers(
+      {
+        name: '',
+        lat: evt.latLng.lat(),
+        lng: evt.latLng.lng()
+      }
+    )
+  }, [])
 
   if (loadError) return 'Erro ao carregar o mapa'
   if (!isLoaded) return 'Carregando mapa'
-  
+
+  const saveName = () => {
+    setMarkers(old => [
+      ...old,
+      {
+        name: namePlace,
+        lat: tempMarkers.lat,
+        lng: tempMarkers.lng
+      }
+    ])
+
+    const form = window.document.getElementById('formNamePlace').style
+    const backForm = window.document.getElementById('backForm').style
+    form.top = '-200px'
+    backForm.zIndex = '-10'
+    backForm.opacity = '0'
+
+    setNamePlace('')
+  }
   return (
     <div>
+      <div id='backForm'>
+        <section id='formNamePlace'>
+          <AiOutlineCloseCircle
+            className='closeIcon'
+            onClick={() => {
+              const form = window.document.getElementById('formNamePlace').style
+              const backForm = window.document.getElementById('backForm').style
+              form.top = '-200px'
+              backForm.zIndex = '-10'
+              backForm.opacity = '0'
+            }}
+          />
+
+          <p>Nome do local:</p>
+          <input
+            type='text' placeholder='Nome do lugar' value={namePlace} onChange={evt => {
+              setNamePlace(evt.target.value)
+            }}
+          />
+          <button onClick={saveName}>Adicionar</button>
+        </section>
+      </div>
       <GoogleMap
         mapContainerStyle={containerStyle}
         zoom={14}
         center={center}
         options={options}
+        onClick={onMapClick}
       >
         {markers.map((item, index) => {
           return (

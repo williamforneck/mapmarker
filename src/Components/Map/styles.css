@@ -1,0 +1,79 @@
+#backForm {
+    position: fixed;
+    z-index: -10;
+    background-color: #00000071;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: all 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#formNamePlace {
+    position: fixed;
+    top: -200px;
+    width: 98%;
+    max-width: 300px;
+    margin: auto;
+    border-radius: 5px;
+    background-color: white;
+    z-index: 20;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transition: all 0.4s;
+    padding: 20px;
+    border: solid 1px gray;
+}
+
+#formNamePlace p {
+    font: normal 14pt Poppins;
+}
+
+#formNamePlace input {
+    font: normal 12pt Poppins;
+    padding: 3px 10px;
+    border-radius: 5px;
+    border: solid 1px #303030;
+    transition: all 0.2s;
+    width: 100%;
+}
+
+#formNamePlace input:focus {
+    border-bottom-color: purple;
+}
+
+#formNamePlace button {
+    border: solid 1px #266bb9;
+    font: normal 12pt Poppins;
+    color: #266bb9;
+    cursor: pointer;
+    background-color: white;
+    margin: 5px;
+    padding: 3px 40px;
+    transition: all 0.2s;
+    border-radius: 5px;
+    width: 100%;
+}
+
+#formNamePlace button:hover {
+    background-color: #266bb9;
+    color: white;
+}
+
+.closeIcon {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 30px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.closeIcon:hover {
+    color: crimson;
+    border-color: crimson;
+}

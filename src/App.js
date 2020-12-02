@@ -5,13 +5,13 @@ import Map from './Components/Map/map'
 
 import './styles.css'
 
-function App() {
+function App () {
   return (
-    <div className="App">
+    <div className='App'>
       <Header />
       <Map />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
