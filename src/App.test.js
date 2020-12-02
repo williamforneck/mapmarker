@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import App from './App'
+import Map from './Components/Map/map'
 
 test('Teste do header', () => {
   render(<App />)
@@ -19,8 +20,8 @@ test('Teste de carregamento do mapa', () => {
   expect(linkElement2).not.toBeInTheDocument()
 })
 
-test('Teste do formulário', () => {
+test('Teste da section ajuda', () => {
   render(<App />)
-  const linkElement3 = screen.getByText(/Syonet/i)
+  const linkElement3 = screen.getByText(/Ajuda/i)
   expect(linkElement3).toBeInTheDocument()
 })

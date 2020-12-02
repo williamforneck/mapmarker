@@ -47,6 +47,7 @@ export default function App () {
   const [namePlace, setNamePlace] = useState(null)
 
   const onMapClick = useCallback(evt => {
+    window.document.getElementById('inputName').focus()
     const form = window.document.getElementById('formNamePlace').style
     const backForm = window.document.getElementById('backForm').style
     form.top = '100px'
@@ -100,7 +101,7 @@ export default function App () {
 
           <p>Nome do local:</p>
           <input
-            type='text' placeholder='Nome do lugar' value={namePlace} onChange={evt => {
+            id='inputName' type='text' placeholder='Nome do lugar' value={namePlace} onChange={evt => {
               setNamePlace(evt.target.value)
             }}
           />
