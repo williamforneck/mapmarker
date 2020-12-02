@@ -10,7 +10,7 @@ testes:
   script:
     - npm test
     
-build:
+r_build:
   image: node:14.12.0
   stage: build
   before_script:
