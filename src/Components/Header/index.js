@@ -9,7 +9,7 @@ const Header = () => {
   return (
     <div>
       <div>
-        <h1>Syonet App</h1>
+        <h1>Map Marker</h1>
         <BiHelpCircle
           className='helpSvg' onClick={() => {
             const sectionWindow = window.document.getElementById('sectionWindow').style
