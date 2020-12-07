@@ -4,7 +4,7 @@ import Map from './Components/Map/map'
 
 test('Teste do header', () => {
   render(<App />)
-  const linkElement = screen.getByText(/Syonet App/i)
+  const linkElement = screen.getByText(/Map Marker/i)
   expect(linkElement).toBeInTheDocument()
 })
 
